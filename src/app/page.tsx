@@ -125,7 +125,18 @@ export default function Home() {
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <div className="flex-grow">
-                  {user?.string_list_data?.[0]?.value || "@ig_user"}
+                  {user?.string_list_data?.[0]?.value || "@ig_user"} <br></br>
+                  <span
+                    className="text-xs text-neutral-400
+"
+                  >
+                    Following since{" "}
+                    {user?.string_list_data?.[0]?.timestamp
+                      ? new Date(user.string_list_data[0].timestamp * 1000)
+                          .toISOString()
+                          .split("T")[0]
+                      : "not available"}
+                  </span>
                 </div>
                 <a
                   href={user?.string_list_data?.[0]?.href}
