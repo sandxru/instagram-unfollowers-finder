@@ -4,11 +4,10 @@ import { Button } from "@/components/ui/button";
 import JSZip from "jszip";
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   const [file, setFile] = useState<File | null>(null);
-  const [jsonData, setJsonData] = useState<any>(null); // Stores parsed JSON data
+  const [analyzeData, setanalyzeData] = useState<any>(null); // Stores parsed JSON data
   const [isAnalyzed, setIsAnalyzed] = useState(false); // To control rendering
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,18 +28,31 @@ export default function Home() {
       const followingFilePath =
         "connections/followers_and_following/following.json";
 
+      const followersFilePath =
+        "connections/followers_and_following/followers_1.json";
+
       const followingFile = zipContent.file(followingFilePath);
       if (!followingFile) {
         console.error(`File not found: ${followingFilePath}`);
         return;
       }
 
-      const fileContent = await followingFile.async("string");
-      const parsedData = JSON.parse(fileContent);
+      const followersFile = zipContent.file(followersFilePath);
+      if (!followersFile) {
+        console.error(`File not found: ${followersFilePath}`);
+        return;
+      }
 
-      console.log("Data in following.json:", parsedData);
+      const followingFileContent = await followingFile.async("string");
+      const followingData = JSON.parse(followingFileContent);
 
-      setJsonData(parsedData); // Update state with the parsed data
+      const followersFileContent = await followersFile.async("string");
+      const followersData = JSON.parse(followersFileContent);
+
+      console.log("Data in following.json:", followingData);
+      console.log("Data in followers.json:", followersData);
+
+      setanalyzeData(followingData); // Update state with the parsed data
       setIsAnalyzed(true); // Mark as analyzed to render the section
     } catch (error) {
       console.error("Error analyzing the file:", error);
@@ -78,14 +90,14 @@ export default function Home() {
         </div>
 
         {/* Conditional rendering */}
-        {isAnalyzed && jsonData && (
+        {isAnalyzed && analyzeData && (
           <div className="flex w-full gap-4 items-center flex-col sm:flex-row">
             <Avatar>
               <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <div>
-              {jsonData?.relationships_following?.[0]?.string_list_data?.[0]
+              {analyzeData?.relationships_following?.[0]?.string_list_data?.[0]
                 ?.value || "@ig_user"}
             </div>
             <Button className="justify-self-end">Unfollow</Button>
