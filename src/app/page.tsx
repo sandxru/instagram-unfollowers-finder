@@ -33,8 +33,8 @@ const compareFollowersAndFollowing = (
 
 export default function Home() {
   const [file, setFile] = useState<File | null>(null);
-  const [analyzeData, setanalyzeData] = useState<any>(null); // Stores parsed JSON data
-  const [isAnalyzed, setIsAnalyzed] = useState(false); // To control rendering
+  const [analyzeData, setanalyzeData] = useState<any>(null);
+  const [isAnalyzed, setIsAnalyzed] = useState(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const uploadedFile = event.target.files?.[0] || null;
@@ -54,10 +54,8 @@ export default function Home() {
       const followingFilePath =
         "connections/followers_and_following/following.json";
 
-      // Get all files in the zip and filter out those that start with "followers_"
       const followersDataArray: any[] = [];
 
-      // Collect all follower files
       const followerFilesPromises = Object.keys(zipContent.files)
         .filter((filePath) =>
           filePath.startsWith("connections/followers_and_following/followers_")
@@ -67,14 +65,12 @@ export default function Home() {
           if (file) {
             const fileContent = await file.async("string");
             const data = JSON.parse(fileContent);
-            followersDataArray.push(...data); // Merge follower data
+            followersDataArray.push(...data);
           }
         });
 
-      // Wait for all follower files to be processed
       await Promise.all(followerFilesPromises);
 
-      // Fetch the following file
       const followingFile = zipContent.file(followingFilePath);
       if (!followingFile) {
         console.error(`File not found: ${followingFilePath}`);
@@ -84,7 +80,6 @@ export default function Home() {
       const followingFileContent = await followingFile.async("string");
       const followingData = JSON.parse(followingFileContent);
 
-      // Now that all files are processed, check if followers data exists
       if (followersDataArray.length === 0) {
         console.error("No followers files found.");
         return;
@@ -97,8 +92,8 @@ export default function Home() {
         followersDataArray,
         followingData
       );
-      setanalyzeData(results); // Update state with the parsed data
-      setIsAnalyzed(true); // Mark as analyzed to render the section
+      setanalyzeData(results);
+      setIsAnalyzed(true);
     } catch (error) {
       console.error("Error analyzing the file:", error);
     }
@@ -107,8 +102,8 @@ export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] justify-items-center min-h-screen p-6 pb-16 gap-8 sm:p-16 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-6 row-start-2 items-center sm:items-start w-full max-w-2xl">
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">Download data from Instagram</li>
+        <ol className="text-neutral-800 list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
+          <li className="mb-2 ">Download data from Instagram</li>
           <li>Upload it below to Analyze</li>
           <a
             href="https://www.instagram.com/"
@@ -116,13 +111,12 @@ export default function Home() {
             rel="noreferrer"
             className="text-blue-500 underline hover:text-blue-700"
           >
-            {" "}
             <br />
             <u>Learn how to Donwload</u>
           </a>
         </ol>
 
-        <div className="flex items-center w-full max-w-sm">
+        <div className="flex items-center justify-center w-full max-w-lg mx-auto text-neutral-800 pt-6 pb-1">
           <Input
             id="picture"
             type="file"
@@ -132,7 +126,7 @@ export default function Home() {
           />
           <Button
             onClick={handleAnalyze}
-            className="rounded-full -ml-4 pl-8 pr-8"
+            className="rounded-full -ml-4 pl-8 pr-8 bg-neutral-800 hover:bg-neutral-700"
           >
             Analyze
           </Button>
@@ -140,20 +134,17 @@ export default function Home() {
 
         {isAnalyzed && analyzeData && (
           <div className="flex flex-col w-full gap-4">
-            <div className="text-center sm:text-left text-lg font-semibold">
+            <div className="text-neutral-800 text-center sm:text-left text-lg font-semibold">
               Total: {analyzeData?.length || 0}
             </div>
             {analyzeData.map((user, index) => (
               <div
                 key={index}
-                className="flex w-full items-center gap-4 border-b border-gray-300 pb-4"
+                className="text-neutral-800 flex w-full items-center gap-4 border-b border-gray-300 pb-4"
               >
                 <Avatar>
-                  <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="avatar"
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
+                  <AvatarImage src="https://github.com" alt="avatar" />
+                  <AvatarFallback>IG</AvatarFallback>
                 </Avatar>
                 <div className="flex-grow">
                   {user?.string_list_data?.[0]?.value || "@ig_user"} <br></br>
