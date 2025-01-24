@@ -156,7 +156,7 @@ export default function Home() {
             </Button>
           </div>
           <span className="text-xs text-neutral-400 mt-2">
-            Your data do not leave your device.
+            Your data stays secure and does not leave your device.
           </span>
         </div>
 
