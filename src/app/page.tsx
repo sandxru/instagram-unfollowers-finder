@@ -111,6 +111,7 @@ export default function Home() {
 
         {isAnalyzed && analyzeData && (
           <div className="flex flex-col w-full gap-4">
+            <div>Total: {analyzeData?.length || 0}</div>
             {analyzeData.map((user, index) => (
               <div
                 key={index}
@@ -119,7 +120,7 @@ export default function Home() {
                 <Avatar>
                   <AvatarImage
                     src="https://github.com/shadcn.png"
-                    alt="@shadcn"
+                    alt="avatar"
                   />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
