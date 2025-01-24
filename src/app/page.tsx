@@ -5,8 +5,18 @@ import JSZip from "jszip";
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const compareFollowersAndFollowing = (followersData, followingData) => {
-  // Extracting usernames from followers.json
+interface Follower {
+  string_list_data: { value: string }[]; // Example structure for follower data
+}
+
+interface Following {
+  username: string; // Assuming each following entry has a username
+}
+
+const compareFollowersAndFollowing = (
+  followersData: Follower[],
+  followingData: Following[]
+) => {
   const followers = followersData.map(
     (item) => item.string_list_data[0]?.value
   );
