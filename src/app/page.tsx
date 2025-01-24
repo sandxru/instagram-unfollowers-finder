@@ -6,10 +6,12 @@ import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const compareFollowersAndFollowing = (followersData, followingData) => {
+  // Extracting usernames from followers.json
   const followers = followersData.map(
     (item) => item.string_list_data[0]?.value
   );
 
+  // Finding objects in following.json that are not in followers.json
   const notFollowingBack = followingData.relationships_following.filter(
     (item) => !followers.includes(item.string_list_data[0]?.value)
   );
@@ -21,8 +23,8 @@ const compareFollowersAndFollowing = (followersData, followingData) => {
 
 export default function Home() {
   const [file, setFile] = useState<File | null>(null);
-  const [analyzeData, setanalyzeData] = useState<any>(null);
-  const [isAnalyzed, setIsAnalyzed] = useState(false);
+  const [analyzeData, setanalyzeData] = useState<any>(null); // Stores parsed JSON data
+  const [isAnalyzed, setIsAnalyzed] = useState(false); // To control rendering
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const uploadedFile = event.target.files?.[0] || null;
@@ -70,8 +72,8 @@ export default function Home() {
         followersData,
         followingData
       );
-      setanalyzeData(results);
-      setIsAnalyzed(true);
+      setanalyzeData(results); // Update state with the parsed data
+      setIsAnalyzed(true); // Mark as analyzed to render the section
     } catch (error) {
       console.error("Error analyzing the file:", error);
     }
@@ -87,14 +89,15 @@ export default function Home() {
               href="https://www.instagram.com/"
               target="_blank"
               rel="noreferrer"
+              className="text-blue-500 underline hover:text-blue-700"
             >
               <u>Instagram</u>
             </a>
           </li>
           <li>Upload it below to Analyze</li>
         </ol>
-        <div className="flex flex-col gap-4 items-center sm:flex-row justify-center w-full">
-          <div className="w-full max-w-sm items-center gap-1.5">
+        <div className="flex flex-col sm:flex-row gap-4 items-center w-full">
+          <div className="grid w-full max-w-sm items-center gap-1.5">
             <Input
               id="picture"
               type="file"
@@ -103,14 +106,16 @@ export default function Home() {
             />
           </div>
 
-          <Button onClick={handleAnalyze} className="mt-4 sm:mt-0 sm:ml-4">
+          <Button onClick={handleAnalyze} className="w-full sm:w-auto">
             Analyze
           </Button>
         </div>
 
         {isAnalyzed && analyzeData && (
-          <div className="flex flex-col w-full gap-4 mt-8">
-            <div>Total: {analyzeData?.length || 0}</div>
+          <div className="flex flex-col w-full gap-4">
+            <div className="text-center sm:text-left text-lg font-semibold">
+              Total: {analyzeData?.length || 0}
+            </div>
             {analyzeData.map((user, index) => (
               <div
                 key={index}
