@@ -22,13 +22,13 @@ export default function Home() {
           </li>
           <li className="mb-2 ">
             Choose your <b>Instagram account</b> (not your Facebook account, if
-            it’s connected).
+            it’s connected)
           </li>
           <li className="mb-2 ">
             Under <b>Some of your information</b>, scroll down to{" "}
             <b>Connections</b>, then select <b>Followers and following</b>
           </li>
-          <li className="mb-2 ">Download to device.</li>
+          <li className="mb-2 ">Download to device</li>
           <li className="mb-2 ">
             Set the date range to <b>All Time</b>
           </li>
@@ -40,7 +40,7 @@ export default function Home() {
           </li>
           <li className="mb-2 ">
             Wait for the process to complete; you can download the file from the
-            same section.
+            same section
           </li>
 
           <Link
