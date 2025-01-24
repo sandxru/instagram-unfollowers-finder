@@ -139,20 +139,25 @@ export default function Home() {
           </a>
         </ol>
 
-        <div className="flex items-center justify-center w-full max-w-lg mx-auto text-neutral-800 pt-6 pb-1">
-          <Input
-            id="picture"
-            type="file"
-            accept=".zip"
-            onChange={handleFileChange}
-            className="rounded-l-full w-full"
-          />
-          <Button
-            onClick={handleAnalyze}
-            className="rounded-full -ml-4 pl-8 pr-8 bg-neutral-800 hover:bg-neutral-700"
-          >
-            Analyze
-          </Button>
+        <div className="flex flex-col items-center justify-center w-full max-w-lg mx-auto text-neutral-800 pt-6 pb-1">
+          <div className="flex items-center w-full">
+            <Input
+              id="picture"
+              type="file"
+              accept=".zip"
+              onChange={handleFileChange}
+              className="rounded-l-full w-full"
+            />
+            <Button
+              onClick={handleAnalyze}
+              className="rounded-full -ml-4 pl-8 pr-8 bg-neutral-800 hover:bg-neutral-700"
+            >
+              Analyze
+            </Button>
+          </div>
+          <span className="text-xs text-neutral-400 mt-2">
+            Your data do not leave your device.
+          </span>
         </div>
 
         {isAnalyzed && analyzeData && (
