@@ -15,6 +15,33 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Instagram Unfollowers Finder",
+  description:
+    "You can use this tool to find out who isn’t following you back on Instagram.",
+  keywords: [
+    "istagram unfollowers",
+    "instagram tracker",
+    "followers assistance",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noarchive: false,
+      nosnippet: false,
+    },
+  },
+  openGraph: {
+    title: "Instagram Unfollowers Finder",
+    description:
+      "You can use this tool to find out who isn’t following you back on Instagram.",
+    url: "https://instagram-unfollowers-finder.vercel.app/",
+    siteName: "Instagram Unfollowers Finder",
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
