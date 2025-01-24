@@ -126,6 +126,13 @@ export default function App() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] justify-items-center min-h-screen p-6 pb-16 gap-8 sm:p-16 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-6 row-start-2 items-start sm:items-start w-full max-w-2xl overflow-hidden">
+        <h1 className="flex flex-col items-center w-full text-neutral-800 text-2xl">
+          Instagram Unfollowers Finder
+        </h1>
+        <h2 className="text-neutral-800">
+          You can use this tool to find out who isn’t following you back on
+          Instagram.
+        </h2>
         <ol className="text-neutral-800 list-inside list-decimal text-sm text-left sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 ">Download data from Instagram</li>
           <li>Upload it below to Analyze</li>
@@ -135,7 +142,7 @@ export default function App() {
             className="text-blue-500 underline hover:text-blue-700"
           >
             <br />
-            <u>Learn how to Donwload</u>
+            <u>Learn how to Download</u>
           </Link>
         </ol>
 
