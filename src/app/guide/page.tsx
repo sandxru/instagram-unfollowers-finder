@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] justify-items-center min-h-screen p-6 pb-16 gap-8 sm:p-16 font-[family-name:var(--font-geist-sans)]">
@@ -24,10 +26,13 @@ export default function Home() {
             Wait till it process, you can download the file under the same place
           </li>
 
-          <a href="/" className="text-blue-500 underline hover:text-blue-700">
+          <Link
+            href="/"
+            className="text-blue-500 underline hover:text-blue-700"
+          >
             <br />
             <u>Go back</u>
-          </a>
+          </Link>
         </ol>
       </main>
     </div>

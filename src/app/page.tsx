@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import JSZip from "jszip";
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
 
 interface Follower {
   string_list_data: { value: string }[];
@@ -128,13 +129,14 @@ export default function App() {
         <ol className="text-neutral-800 list-inside list-decimal text-sm text-left sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 ">Download data from Instagram</li>
           <li>Upload it below to Analyze</li>
-          <a
+
+          <Link
             href="/guide"
             className="text-blue-500 underline hover:text-blue-700"
           >
             <br />
             <u>Learn how to Donwload</u>
-          </a>
+          </Link>
         </ol>
 
         <div className="flex flex-col items-center justify-center w-full max-w-lg mx-auto text-neutral-800 pt-6 pb-1">
