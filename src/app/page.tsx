@@ -125,7 +125,6 @@ export default function App() {
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] justify-items-center min-h-screen p-6 pb-16 gap-8 sm:p-16 font-[family-name:var(--font-geist-sans)]">
-      {/* <main className="flex flex-col gap-6 row-start-2 items-start sm:items-start w-full max-w-2xl"> */}
       <main className="flex flex-col gap-6 row-start-2 items-start sm:items-start w-full max-w-2xl overflow-hidden">
         <ol className="text-neutral-800 list-inside list-decimal text-sm text-left sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 ">Download data from Instagram</li>
