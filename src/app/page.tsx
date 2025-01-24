@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -13,15 +12,37 @@ interface Following {
   string_list_data: { value: string }[];
 }
 
+interface AnalyzeDataItem {
+  string_list_data: {
+    href?: string;
+    value?: string;
+    timestamp?: number;
+  }[];
+}
+
+interface StringListData {
+  href: string;
+  value: string;
+  timestamp: number;
+}
+
+interface FollowerData {
+  string_list_data: StringListData[];
+}
+
 const compareFollowersAndFollowing = (
   followersData: Follower[],
-  followingData: Following[]
+  followingData: { relationships_following: Following[] }
 ) => {
   const followers = followersData.map(
     (item) => item.string_list_data[0]?.value
   );
 
-  // Finding objects in following.json that are not in followers.json
+  if (!followingData.relationships_following) {
+    console.error("Invalid following data structure.");
+    return [];
+  }
+
   const notFollowingBack = followingData.relationships_following.filter(
     (item) => !followers.includes(item.string_list_data[0]?.value)
   );
@@ -33,7 +54,9 @@ const compareFollowersAndFollowing = (
 
 export default function Home() {
   const [file, setFile] = useState<File | null>(null);
-  const [analyzeData, setanalyzeData] = useState<any>(null);
+  const [analyzeData, setAnalyzeData] = useState<AnalyzeDataItem[] | null>(
+    null
+  );
   const [isAnalyzed, setIsAnalyzed] = useState(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +77,7 @@ export default function Home() {
       const followingFilePath =
         "connections/followers_and_following/following.json";
 
-      const followersDataArray: any[] = [];
+      const followersDataArray: FollowerData[] = [];
 
       const followerFilesPromises = Object.keys(zipContent.files)
         .filter((filePath) =>
@@ -92,7 +115,7 @@ export default function Home() {
         followersDataArray,
         followingData
       );
-      setanalyzeData(results);
+      setAnalyzeData(results);
       setIsAnalyzed(true);
     } catch (error) {
       console.error("Error analyzing the file:", error);
