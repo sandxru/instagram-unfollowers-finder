@@ -109,16 +109,26 @@ export default function Home() {
           <Button onClick={handleAnalyze}>Analyze</Button>
         </div>
 
-        {/* Conditional rendering */}
         {isAnalyzed && analyzeData && (
-          <div className="flex w-full gap-4 items-center flex-col sm:flex-row">
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <div>{analyzeData?.string_list_data?.[1]?.value || "@ig_user"}</div>
-
-            <Button className="justify-self-end">Unfollow</Button>
+          <div className="flex flex-col w-full gap-4">
+            {analyzeData.map((user, index) => (
+              <div
+                key={index}
+                className="flex w-full items-center gap-4 border-b border-gray-300 pb-4"
+              >
+                <Avatar>
+                  <AvatarImage
+                    src="https://github.com/shadcn.png"
+                    alt="@shadcn"
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div className="flex-grow">
+                  {user?.string_list_data?.[0]?.value || "@ig_user"}
+                </div>
+                <Button>Unfollow</Button>
+              </div>
+            ))}
           </div>
         )}
       </main>
