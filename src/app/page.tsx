@@ -93,9 +93,8 @@ export default function Home() {
               <u>Instagram</u>
             </a>
           </li>
-          <li>Upload it here to Analyze</li>
+          <li>Upload it below to Analyze</li>
         </ol>
-
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Input
@@ -143,7 +142,9 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Button>Unfollow</Button>
+                  <Button className="bg-rose-600 bg-opacity-10 text-rose-600 rounded-full h-7 pl-5 pr-5 text-xs hover:bg-rose-800 hover:bg-opacity-10 transform hover:scale-105 transition duration-200">
+                    UNFOLLOW
+                  </Button>
                 </a>
               </div>
             ))}
