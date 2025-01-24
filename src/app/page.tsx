@@ -83,30 +83,32 @@ export default function Home() {
     <div className="grid grid-rows-[20px_1fr_20px] justify-items-center min-h-screen p-6 pb-16 gap-8 sm:p-16 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-6 row-start-2 items-center sm:items-start w-full max-w-2xl">
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Download data from{" "}
-            <a
-              href="https://www.instagram.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="text-blue-500 underline hover:text-blue-700"
-            >
-              <u>Instagram</u>
-            </a>
-          </li>
+          <li className="mb-2">Download data from Instagram</li>
           <li>Upload it below to Analyze</li>
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noreferrer"
+            className="text-blue-500 underline hover:text-blue-700"
+          >
+            {" "}
+            <br />
+            <u>Learn how to Donwload</u>
+          </a>
         </ol>
-        <div className="flex flex-col sm:flex-row gap-4 items-center w-full">
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Input
-              id="picture"
-              type="file"
-              accept=".zip"
-              onChange={handleFileChange}
-            />
-          </div>
 
-          <Button onClick={handleAnalyze} className="w-full sm:w-auto">
+        <div className="flex items-center w-full max-w-sm">
+          <Input
+            id="picture"
+            type="file"
+            accept=".zip"
+            onChange={handleFileChange}
+            className="rounded-l-full w-full"
+          />
+          <Button
+            onClick={handleAnalyze}
+            className="rounded-full -ml-4 pl-8 pr-8"
+          >
             Analyze
           </Button>
         </div>
@@ -145,7 +147,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                 >
                   <Button className="bg-rose-600 bg-opacity-10 text-rose-600 rounded-full h-7 pl-5 pr-5 text-xs hover:bg-rose-800 hover:bg-opacity-10 transform hover:scale-105 transition duration-200">
-                    UNFOLLOW
+                    Unfollow
                   </Button>
                 </a>
               </div>
