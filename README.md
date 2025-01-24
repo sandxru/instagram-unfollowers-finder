@@ -1,2 +1,2 @@
-Download data from Instagram
-Upload it here to Analyze
+- Download data from Instagram
+- Upload it here to Analyze
