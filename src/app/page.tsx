@@ -126,7 +126,13 @@ export default function Home() {
                 <div className="flex-grow">
                   {user?.string_list_data?.[0]?.value || "@ig_user"}
                 </div>
-                <Button>Unfollow</Button>
+                <a
+                  href={user?.string_list_data?.[0]?.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button>Unfollow</Button>
+                </a>
               </div>
             ))}
           </div>
