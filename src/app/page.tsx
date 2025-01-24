@@ -1,22 +1,96 @@
+"use client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import JSZip from "jszip";
+import { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
+  const [file, setFile] = useState<File | null>(null);
+  const [jsonData, setJsonData] = useState<any>(null); // Stores parsed JSON data
+  const [isAnalyzed, setIsAnalyzed] = useState(false); // To control rendering
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const uploadedFile = event.target.files?.[0] || null;
+    setFile(uploadedFile);
+  };
+
+  const handleAnalyze = async () => {
+    if (!file) {
+      console.error("No file uploaded");
+      return;
+    }
+
+    try {
+      const zip = new JSZip();
+      const zipContent = await zip.loadAsync(file);
+
+      const followingFilePath =
+        "connections/followers_and_following/following.json";
+
+      const followingFile = zipContent.file(followingFilePath);
+      if (!followingFile) {
+        console.error(`File not found: ${followingFilePath}`);
+        return;
+      }
+
+      const fileContent = await followingFile.async("string");
+      const parsedData = JSON.parse(fileContent);
+
+      console.log("Data in following.json:", parsedData);
+
+      setJsonData(parsedData); // Update state with the parsed data
+      setIsAnalyzed(true); // Mark as analyzed to render the section
+    } catch (error) {
+      console.error("Error analyzing the file:", error);
+    }
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="grid grid-rows-[20px_1fr_20px] justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">Download data from Instagram</li>
+          <li className="mb-2">
+            Download data from{" "}
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <u>Instagram</u>
+            </a>
+          </li>
           <li>Upload it here to Analyze</li>
         </ol>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Input id="picture" type="file" />
+            <Input
+              id="picture"
+              type="file"
+              accept=".zip"
+              onChange={handleFileChange}
+            />
           </div>
 
-          <Button>Analyze</Button>
+          <Button onClick={handleAnalyze}>Analyze</Button>
         </div>
+
+        {/* Conditional rendering */}
+        {isAnalyzed && jsonData && (
+          <div className="flex w-full gap-4 items-center flex-col sm:flex-row">
+            <Avatar>
+              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <div>
+              {jsonData?.relationships_following?.[0]?.string_list_data?.[0]
+                ?.value || "@ig_user"}
+            </div>
+            <Button className="justify-self-end">Unfollow</Button>
+          </div>
+        )}
       </main>
     </div>
   );
