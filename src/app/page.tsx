@@ -52,7 +52,7 @@ const compareFollowersAndFollowing = (
   return notFollowingBack;
 };
 
-export default function Home() {
+export default function App() {
   const [file, setFile] = useState<File | null>(null);
   const [analyzeData, setAnalyzeData] = useState<AnalyzeDataItem[] | null>(
     null
@@ -129,9 +129,7 @@ export default function Home() {
           <li className="mb-2 ">Download data from Instagram</li>
           <li>Upload it below to Analyze</li>
           <a
-            href="https://www.instagram.com/"
-            target="_blank"
-            rel="noreferrer"
+            href="/guide"
             className="text-blue-500 underline hover:text-blue-700"
           >
             <br />
