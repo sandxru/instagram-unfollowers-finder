@@ -68,8 +68,11 @@ export default function Home() {
       console.log("Data in following.json:", followingData);
       console.log("Data in followers.json:", followersData);
 
-      compareFollowersAndFollowing(followersData, followingData);
-      setanalyzeData(followingData); // Update state with the parsed data
+      const results = compareFollowersAndFollowing(
+        followersData,
+        followingData
+      );
+      setanalyzeData(results); // Update state with the parsed data
       setIsAnalyzed(true); // Mark as analyzed to render the section
     } catch (error) {
       console.error("Error analyzing the file:", error);
@@ -113,10 +116,8 @@ export default function Home() {
               <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <div>
-              {analyzeData?.relationships_following?.[0]?.string_list_data?.[0]
-                ?.value || "@ig_user"}
-            </div>
+            <div>{analyzeData?.string_list_data?.[1]?.value || "@ig_user"}</div>
+
             <Button className="justify-self-end">Unfollow</Button>
           </div>
         )}
