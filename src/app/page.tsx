@@ -5,6 +5,22 @@ import JSZip from "jszip";
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+const compareFollowersAndFollowing = (followersData, followingData) => {
+  // Extracting usernames from followers.json
+  const followers = followersData.map(
+    (item) => item.string_list_data[0]?.value
+  );
+
+  // Finding objects in following.json that are not in followers.json
+  const notFollowingBack = followingData.relationships_following.filter(
+    (item) => !followers.includes(item.string_list_data[0]?.value)
+  );
+
+  console.log("Users in following but not in followers:", notFollowingBack);
+
+  return notFollowingBack;
+};
+
 export default function Home() {
   const [file, setFile] = useState<File | null>(null);
   const [analyzeData, setanalyzeData] = useState<any>(null); // Stores parsed JSON data
@@ -52,6 +68,7 @@ export default function Home() {
       console.log("Data in following.json:", followingData);
       console.log("Data in followers.json:", followersData);
 
+      compareFollowersAndFollowing(followersData, followingData);
       setanalyzeData(followingData); // Update state with the parsed data
       setIsAnalyzed(true); // Mark as analyzed to render the section
     } catch (error) {
