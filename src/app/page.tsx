@@ -44,12 +44,25 @@ export default function Home() {
       const followingFilePath =
         "connections/followers_and_following/following.json";
 
-      const followersFilePaths = [
-        "connections/followers_and_following/followers_1.json",
-        "connections/followers_and_following/followers_2.json",
-        "connections/followers_and_following/followers_3.json",
-        "connections/followers_and_following/followers_4.json",
-      ];
+      // Get all files in the zip and filter out those that start with "followers_"
+      const followersDataArray: any[] = [];
+
+      // Collect all follower files
+      const followerFilesPromises = Object.keys(zipContent.files)
+        .filter((filePath) =>
+          filePath.startsWith("connections/followers_and_following/followers_")
+        )
+        .map(async (filePath) => {
+          const file = zipContent.file(filePath);
+          if (file) {
+            const fileContent = await file.async("string");
+            const data = JSON.parse(fileContent);
+            followersDataArray.push(...data); // Merge follower data
+          }
+        });
+
+      // Wait for all follower files to be processed
+      await Promise.all(followerFilesPromises);
 
       // Fetch the following file
       const followingFile = zipContent.file(followingFilePath);
@@ -58,24 +71,14 @@ export default function Home() {
         return;
       }
 
-      // Fetch all follower files (check each for existence)
-      const followersDataArray = [];
-      for (const filePath of followersFilePaths) {
-        const followerFile = zipContent.file(filePath);
-        if (followerFile) {
-          const followerFileContent = await followerFile.async("string");
-          const followerData = JSON.parse(followerFileContent);
-          followersDataArray.push(...followerData); // Merge follower data
-        }
-      }
+      const followingFileContent = await followingFile.async("string");
+      const followingData = JSON.parse(followingFileContent);
 
+      // Now that all files are processed, check if followers data exists
       if (followersDataArray.length === 0) {
         console.error("No followers files found.");
         return;
       }
-
-      const followingFileContent = await followingFile.async("string");
-      const followingData = JSON.parse(followingFileContent);
 
       console.log("Data in following.json:", followingData);
       console.log("Data in followers.json:", followersDataArray);
