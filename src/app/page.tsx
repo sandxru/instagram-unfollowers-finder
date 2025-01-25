@@ -135,13 +135,15 @@ export default function App() {
         </h2>
         <ol className="text-neutral-800 list-inside list-decimal text-sm text-left sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 ">Download data from Instagram</li>
-          <li>Upload it below to Analyze</li>
+          <li className="mb-2 ">
+            Select the zip file downloaded from Instagram.
+          </li>
+          <li className="mb-2 ">Hit Analyze</li>
 
           <Link
             href="/guide"
             className="text-blue-500 underline hover:text-blue-700"
           >
-            <br />
             <u>Learn how to Download</u>
           </Link>
         </ol>
