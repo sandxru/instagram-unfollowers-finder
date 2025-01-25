@@ -5,6 +5,7 @@ import JSZip from "jszip";
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import { Github } from "lucide-react";
 
 interface Follower {
   string_list_data: { value: string }[];
@@ -207,6 +208,23 @@ export default function App() {
             ))}
           </div>
         )}
+
+        <footer className="flex flex-row justify-between items-center w-full px-14 py-5 bg-white fixed bottom-0 left-0 flex-wrap sm:flex-nowrap">
+          <Link
+            href="https://sandarumuthuwadige.com"
+            target="_blank"
+            className="text-blue-500 hover:text-blue-700 text-sm order-1 sm:order-1"
+          >
+            sandarumuthuwadige.com
+          </Link>
+          <Link
+            href="https://github.com/sandxru/instagram-unfollowers-finder"
+            target="_blank"
+            className="inline-flex h-8 items-center rounded-full border border-gray-200 dark:border-neutral-800 shadow-sm w-8 hover:scale-110 transition-transform p-2 order-2 sm:order-2"
+          >
+            <Github className="w-4 h-4 text-neutral-800 hover:text-neutral-700" />
+          </Link>
+        </footer>
       </main>
     </div>
   );
