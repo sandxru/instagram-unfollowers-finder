@@ -209,7 +209,7 @@ export default function App() {
           </div>
         )}
 
-        <footer className="flex flex-row justify-between items-center w-[90%] mx-auto py-5 bg-white fixed bottom-0 left-1/2 transform -translate-x-1/2 flex-wrap sm:flex-nowrap">
+        <footer className="flex flex-row justify-between items-center w-[90%] mx-auto py-5 bg-white bg-opacity-50 backdrop-blur-md fixed bottom-0 left-1/2 transform -translate-x-1/2 flex-wrap sm:flex-nowrap">
           <Link
             href="https://sandarumuthuwadige.com"
             target="_blank"
