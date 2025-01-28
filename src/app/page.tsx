@@ -156,7 +156,7 @@ export default function App() {
               return (
                 <div
                   key={`${userData.value}-${index}`}
-                  className="text-neutral-800 flex w-full items-center gap-4 border-b border-gray-300 pb-4"
+                  className="text-neutral-800 flex w-full items-center gap-4 border-b border-neutral-200 pb-4"
                 >
                   <Avatar>
                     <AvatarFallback>{fallbackLetter}</AvatarFallback>
