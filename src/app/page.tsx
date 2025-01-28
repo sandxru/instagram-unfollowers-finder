@@ -152,7 +152,6 @@ export default function App() {
                   className="text-neutral-800 flex w-full items-center gap-4 border-b border-gray-300 pb-4"
                 >
                   <Avatar>
-                    <AvatarImage src={userData.href} alt="avatar" />
                     <AvatarFallback>
                       {userData.value?.[0]?.toUpperCase() ?? "IG"}
                     </AvatarFallback>
