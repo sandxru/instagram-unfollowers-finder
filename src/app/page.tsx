@@ -153,7 +153,9 @@ export default function App() {
                 >
                   <Avatar>
                     <AvatarImage src={userData.href} alt="avatar" />
-                    <AvatarFallback>IG</AvatarFallback>
+                    <AvatarFallback>
+                      {userData.value?.[0]?.toUpperCase() ?? "IG"}
+                    </AvatarFallback>
                   </Avatar>
                   <div className="flex-grow">
                     {userData.value || "@ig_user"} <br />
