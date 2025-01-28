@@ -146,15 +146,20 @@ export default function App() {
             </div>
             {results.map((user, index) => {
               const userData = user.string_list_data[0] || {};
+              // Extract the first valid character (ignoring underscores)
+              const fallbackLetter =
+                userData.value
+                  ?.replace(/^_+/, "") // Remove leading underscores
+                  ?.charAt(0)
+                  ?.toUpperCase() ?? "IG";
+
               return (
                 <div
                   key={`${userData.value}-${index}`}
                   className="text-neutral-800 flex w-full items-center gap-4 border-b border-gray-300 pb-4"
                 >
                   <Avatar>
-                    <AvatarFallback>
-                      {userData.value?.[0]?.toUpperCase() ?? "IG"}
-                    </AvatarFallback>
+                    <AvatarFallback>{fallbackLetter}</AvatarFallback>
                   </Avatar>
                   <div className="flex-grow">
                     {userData.value || "@ig_user"} <br />
