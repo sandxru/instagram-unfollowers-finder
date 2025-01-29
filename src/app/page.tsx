@@ -122,7 +122,7 @@ export default function App() {
               className={cn(
                 "rounded-full -ml-4 pl-8 pr-8 bg-neutral-800 hover:bg-neutral-700",
                 isLoading
-                  ? "opacity-100 bg-neutral-800 text-neutral-200 scale-100 cursor-wait"
+                  ? "opacity-100 bg-neutral-800 scale-100 cursor-wait"
                   : "disabled:opacity-100 disabled:bg-neutral-500"
               )}
               disabled={!file || isLoading}
