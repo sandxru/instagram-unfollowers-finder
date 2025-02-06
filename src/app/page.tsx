@@ -177,7 +177,7 @@ export default function App() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Button className="bg-rose-600 bg-opacity-10 text-rose-600 rounded-full h-7 pl-5 pr-5 text-xs hover:bg-rose-800 hover:bg-opacity-10 transform hover:scale-105 transition duration-200 mr-1">
+                    <Button className="bg-rose-600 bg-opacity-10 text-rose-600 rounded-full h-7 pl-5 pr-5 text-xs hover:bg-rose-800 hover:bg-opacity-10 transform hover:scale-105 transition duration-200">
                       Unfollow
                     </Button>
                   </a>
